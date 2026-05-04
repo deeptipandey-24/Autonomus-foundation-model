@@ -18,29 +18,24 @@ class NuScenesNoMap(NuScenes):
 
 nusc = NuScenesNoMap(version='v1.0-mini', dataroot=dataroot, verbose=True)
 
-# ✅ Build sample_token → list of sample_data records manually
 from collections import defaultdict
 sample_to_data = defaultdict(list)
 for sd in nusc.sample_data:
     sample_to_data[sd['sample_token']].append(sd)
 
-# ✅ Get first sample
 first_sample = nusc.sample[0]
 sample_token = first_sample['token']
 print(f"Sample token: {sample_token}")
 
-# ✅ Find all sample_data for this sample
 related = sample_to_data[sample_token]
 print(f"\nFound {len(related)} sample_data records for this sample")
 
-# ✅ Find the front camera keyframe
 cam_sd = None
 for sd in related:
     if 'CAM_FRONT' in sd['filename'] and sd['is_key_frame']:
         cam_sd = sd
         break
 
-# Fallback: any CAM_FRONT record
 if cam_sd is None:
     for sd in related:
         if 'CAM_FRONT' in sd['filename']:
@@ -59,8 +54,8 @@ if cam_sd:
     plt.axis('off')
     plt.tight_layout()
     plt.show()
-    print("✅ Image rendered successfully")
+    print("Image rendered successfully")
 else:
-    print("❌ No CAM_FRONT found. Available filenames:")
+    print(" No CAM_FRONT found. Available filenames:")
     for sd in related[:10]:
         print(" ", sd['filename'])
