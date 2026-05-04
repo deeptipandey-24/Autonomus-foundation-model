@@ -1,1 +1,12 @@
 data/
+.venv/
+__pycache__/
+*.pyc
+*.pt
+.DS_Store
+.idea/
+runs/
+*.tar
+*.tgz
+*.zip
+can_bus/
