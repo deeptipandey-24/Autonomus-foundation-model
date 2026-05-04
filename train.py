@@ -88,7 +88,7 @@ def main():
         if val_loss < best_val:
             best_val = val_loss
             torch.save({'epoch': epoch, 'model': model.state_dict(), 'val_loss': val_loss}, 'runs/best_model.pt')
-            print(f'  ✅ Best model saved!')
+            print(f'Best model saved!')
 
     print('Training complete! Checkpoint saved to runs/best_model.pt')
 
